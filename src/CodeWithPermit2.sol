@@ -82,5 +82,7 @@ contract CodeWithPermit2 is ICodeWithPermit2 {
             transferParam.receiver,
             transferDetails.requestedAmount
         );
+
+        return true;
     }
 }
