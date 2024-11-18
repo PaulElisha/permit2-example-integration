@@ -40,6 +40,8 @@ contract CodeWithPermit2Test is Test, Constants, TestHelper {
         privateKey = vm.envUint("PRIVATE_KEY");
         userA = vm.addr(privateKey);
 
+        userB = makeAddr("USERB");
+
         console2.log(userA);
 
         vm.startPrank(userA);
@@ -87,7 +89,7 @@ contract CodeWithPermit2Test is Test, Constants, TestHelper {
         domain_separator = permit2.DOMAIN_SEPARATOR();
 
         vm.startPrank(userA);
-        aero.approve(address(permit2), mockERC20.balanceOf(userA));
+        mockERC20.approve(address(permit2), mockERC20.balanceOf(userA));
         vm.stopPrank();
 
         transferParam = createTransferParam(mockERC20, userB, amount);

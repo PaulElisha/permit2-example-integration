@@ -72,7 +72,7 @@ contract CodeWithPermit2 is ICodeWithPermit2 {
             transferParam.receiver
         );
 
-        if (receiverBalanceAfter < receiverBalanceBefore) {
+        if (receiverBalanceAfter <= receiverBalanceBefore) {
             revert();
         }
 
