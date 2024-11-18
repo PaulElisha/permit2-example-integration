@@ -115,7 +115,12 @@ contract CodeWithPermit2Test is Test, Constants, TestHelper {
             );
 
         vm.startPrank(userA);
-        assetScooper.sweepAsset(transferParam, permit2_, transferDetails_, sig);
+        codeWithPermit2.transferWithPermit2(
+            transferParam,
+            permit2_,
+            transferDetails_,
+            sig
+        );
         vm.stopPrank();
     }
 }
