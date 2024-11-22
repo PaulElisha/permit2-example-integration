@@ -77,7 +77,7 @@ contract CodeWithPermit2Test is Test, Constants, TestHelper {
         sig = getPermitTransferSignature(
             permit2_,
             privateKey,
-            address(codeWithPermit2),
+            userB,
             domain_separator
         );
 
