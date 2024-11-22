@@ -34,9 +34,6 @@ contract CodeWithPermit2Test is Test, Constants, TestHelper {
         permit2 = new Permit2();
         codeWithPermit2 = new CodeWithPermit2(permit2);
 
-        // deployAssetScooper = new DeployAssetScooper();
-        // (codeWithPermit2, permit2) = deployAssetScooper.run();
-
         privateKey = vm.envUint("PRIVATE_KEY");
         userA = vm.addr(privateKey);
 
@@ -58,31 +55,7 @@ contract CodeWithPermit2Test is Test, Constants, TestHelper {
         mockERC20.approve(address(permit2), type(uint256).max);
 
         vm.stopPrank();
-
-        // aero = IERC20(AERO);
-
-        // mainnetFork = vm.createFork(fork_url);
-        // vm.selectFork(mainnetFork);
     }
-
-    // function testMint() public {
-    //     userA = makeAddr("userA");
-    //     userB = makeAddr("userB");
-    //     console2.log(userA);
-
-    //     vm.startPrank(userA);
-
-    //     mockERC20.mint(userA, 100 ether);
-
-    //     uint256 balance = mockERC20.balanceOf(userA);
-    //     assertEq(
-    //         balance,
-    //         100 ether,
-    //         "User A should have 100 ether after minting"
-    //     );
-
-    //     vm.stopPrank();
-    // }
 
     function testTransferWithPermit2() public {
         uint256 nonce = 0;
@@ -110,7 +83,7 @@ contract CodeWithPermit2Test is Test, Constants, TestHelper {
 
         ISignatureTransfer.SignatureTransferDetails
             memory transferDetails_ = getTransferDetails(
-                address(codeWithPermit2),
+                userB,
                 mockERC20.balanceOf(userA)
             );
 
