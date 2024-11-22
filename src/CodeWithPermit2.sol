@@ -29,7 +29,7 @@ contract CodeWithPermit2 is ICodeWithPermit2 {
 
         if (userBalance > 0) {
             if (
-                transferDetails.to != address(this) ||
+                transferDetails.to != transferParam.receiver ||
                 transferDetails.requestedAmount > userBalance ||
                 permit2Transfer.permitted.amount != transferDetails.amount
             ) {
@@ -37,8 +37,8 @@ contract CodeWithPermit2 is ICodeWithPermit2 {
             }
         }
 
-        uint256 contractBalance = IERC20(transferParam.asset).balanceOf(
-            address(this)
+        uint256 receiverBalanceBefore = IERC20(transferParam.asset).balanceOf(
+            transferParam.receiver
         );
 
         permit2.permitTransferFrom(
@@ -48,24 +48,15 @@ contract CodeWithPermit2 is ICodeWithPermit2 {
             sig
         );
 
-        if (contractBalance <= 0) {
+        if (receiverBalance <= 0) {
             revert();
         }
 
         emit Permit2Transfer(
             transferParam.asset,
             msg.sender,
-            address(this),
-            transferDetails.requestedAmount
-        );
-
-        uint256 receiverBalanceBefore = IERC20(transferParam.asset).balanceOf(
-            transferParam.receiver
-        );
-
-        transferParam.asset.safeTransfer(
             transferParam.receiver,
-            transferParam.amount
+            transferDetails.requestedAmount
         );
 
         uint256 receiverBalanceAfter = IERC20(transferParam.asset).balanceOf(
