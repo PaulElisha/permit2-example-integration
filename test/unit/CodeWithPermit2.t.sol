@@ -11,8 +11,9 @@ import "../Helper/TestHelper.sol";
 import "permit2/interfaces/IPermit2.sol";
 import "permit2/interfaces/ISignatureTransfer.sol";
 import "../mocks/MockERC20.sol";
+import "../../src/Utils/Utils.sol";
 
-contract CodeWithPermit2Test is Test, Constants, TestHelper {
+contract CodeWithPermit2Test is Test, Constants, Utils {
     DeployCodeWithPermit2 deployCodeWithPermit2;
     CodeWithPermit2 codeWithPermit2;
     ICodeWithPermit2.TransferParam transferParam;
